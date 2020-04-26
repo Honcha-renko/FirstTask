@@ -1,10 +1,11 @@
 # frozen_string_literal: true
-class Player
-  attr_reader :received_cards
+class Player < Holders
+  # number of cards that should be given
+  REQUIRED_CARDS_NUMBER = 2
+  attr_reader :received_cards, :required_card_number
 
-  @@required_number_of_cards = 2 # number of cards that should be given
-  @@received_cards= []
   def initialize(cards)
-    @received_cards << cards # received cards
+    @required_card_number = REQUIRED_CARDS_NUMBER
+    @received_cards = cards
   end
 end
