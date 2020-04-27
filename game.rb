@@ -17,7 +17,7 @@ class Game
   def create_deck
     result = []
     (2..14).each do |value|
-      %w[H D C S].map { |suit| result << Card.new(suit, value) }
+      %w[H D C S].map { |suit| result.push(Card.new(suit, value)) }
     end
     result
   end
@@ -64,30 +64,20 @@ class Game
 
   end
 
-  def find_same_value
+  def find_same_value()
     @all_cards = @player.received_cards + @board.received_cards
-    puts @all_cards.combination(2), @all_cards.combination(2).inspect
-    pairs = @all_cards.combination(2).select { |arr| arr[1].value == arr[2].value }
+    @same_value_arr = []
+    @all_cards.each_with_index do |card, i|
+      @same_value_arr.push(card) if card[i].value == card[i + 1].value
+    end
+    @same_value_arr.uniq
   end
-    # @combination = @all_cards.combination(2)
-    # @same_value_arr = []
-    # @combination.each do |pair, i|
-    #   if (pair[i].value == pair[i+1].value)
-    #     @same_value_arr.append(pair)
-    #   end
-    # end
-    # if @combination
-    #  .any? { |a, b| a.value == b.value }
-    # return while (@all_cards.combination(2){ |a, b| a.value == b.value })
-    #
-    # end
-
 
   def find_same_suit
-    @all_cards = @player.received_cards + @board.received_cards
-    if  @all_cards.combination(2) {|a, b| a == b }
-
-    end
+    # @all_cards = @player.received_cards + @board.received_cards
+    # if  @all_cards.combination(2) { |a, b| a == b }
+    #
+    # end
 
   end
   def find_sequence
